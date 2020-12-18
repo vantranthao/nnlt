@@ -1,30 +1,59 @@
 #include <iostream>
-#include <cmath>
 using namespace std;
-// nhap data
-void nhapData (int& h, int& m) {
-	cout << "Moi nhap gio, phut (dang 24h): \n";
-	cout << "Gio: "; cin >> h;
-	cout << "Phut: "; cin >> m;
-}
-// transfer
-void transfer (int& h, int& m, char& t) {
-	t = 'A'; //fix cung t
-	if (h >= 12) {
-		if (h > 12) h-=12;
-		t = 'P';
-	} // case con lai giu nguyen!
-}
-
-// xuat data
-void xuatData (int& h, int& m, char& t) {
-	cout << "Gio, phut (dang 12h): \n" << h << ":" << (m<10?"0":"") << m << (t=='A'?" A.M":" P.M");
-}
-
-int main() {
-	int h,m;
-	char t;
-	nhapData(h,m);
-	transfer(h,m,t);
-	xuatData(h,m,t);
+class HoaDon {
+	private:
+		int soLuong;
+		double giaCa;
+	public:
+		HoaDon() {
+			soLuong = 1; giaCa = 10;
+		}
+		HoaDon(int sl, double gc) {
+			soLuong = sl; giaCa = gc;
+		}
+		double tongTien() {
+			return soLuong*giaCa;
+		}
+		void setGiaCa(double giaMoi) {
+			giaCa = giaMoi;
+		}
+		void inHoaDon() {
+			cout << "--------------" << endl;
+			cout << "Hoa don cua spham hien co!" << endl;
+			cout << "So spham: " << soLuong << endl;
+			cout << "Gia spham: " << giaCa << endl;
+			cout << "Tong tien : " << tongTien() << endl;
+		}
+};
+class HoaDonKM : public HoaDon {
+	private:
+		double giamGia;
+	public:
+		HoaDonKM():HoaDon() {
+			giamGia = 2;
+		}
+		HoaDonKM(int sl, double gc, double gg):HoaDon(sl, gc) {
+			giamGia = gg;
+		}
+		double thanhToan() {
+			return tongTien() - giamGia;
+		}
+		void inHoaDon() {
+			HoaDon::inHoaDon();
+			cout << "So tien duoc giam gia: " << giamGia << endl;
+			cout << "So tien phai thanh toan: " << thanhToan() << endl;
+		}
+};
+int main () {
+	HoaDon d;
+	d.inHoaDon();
+	
+	HoaDon d1(5,3);
+	d1.inHoaDon();
+	
+	HoaDonKM km;
+	km.inHoaDon();
+	
+	//HoaDon km1(3,5,2);
+	//km1.inHoaDon();
 }
