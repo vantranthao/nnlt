@@ -1,59 +1,32 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
-class HoaDon {
-	private:
-		int soLuong;
-		double giaCa;
-	public:
-		HoaDon() {
-			soLuong = 1; giaCa = 10;
+template<class T>
+
+T most_common(T A[], int size) {
+	T winner = A[0]; int freq = 0; // so lan xuat hien!
+	int i, j, temp;
+	for(i = 0; i < size; i++) {
+		for(temp = j = 0; j < size; j++) { // dem tan suat gtri nay!
+			if(A[i] == A[j]) {
+				temp++; // bien dem
+			}
 		}
-		HoaDon(int sl, double gc) {
-			soLuong = sl; giaCa = gc;
+		if(temp > freq) {
+			freq = temp;
+			winner = A[i];
 		}
-		double tongTien() {
-			return soLuong*giaCa;
-		}
-		void setGiaCa(double giaMoi) {
-			giaCa = giaMoi;
-		}
-		void inHoaDon() {
-			cout << "--------------" << endl;
-			cout << "Hoa don cua spham hien co!" << endl;
-			cout << "So spham: " << soLuong << endl;
-			cout << "Gia spham: " << giaCa << endl;
-			cout << "Tong tien : " << tongTien() << endl;
-		}
-};
-class HoaDonKM : public HoaDon {
-	private:
-		double giamGia;
-	public:
-		HoaDonKM():HoaDon() {
-			giamGia = 2;
-		}
-		HoaDonKM(int sl, double gc, double gg):HoaDon(sl, gc) {
-			giamGia = gg;
-		}
-		double thanhToan() {
-			return tongTien() - giamGia;
-		}
-		void inHoaDon() {
-			HoaDon::inHoaDon();
-			cout << "So tien duoc giam gia: " << giamGia << endl;
-			cout << "So tien phai thanh toan: " << thanhToan() << endl;
-		}
-};
-int main () {
-	HoaDon d;
-	d.inHoaDon();
+	}
+	cout << winner; // gtri xuat hien nhieu nhat!
+}
+
+int main() {
+	int arr[17] = {1,1,1,3,3,3,3,3,3,3,2,1,4,5,3};
+	most_common( arr, 10 );
 	
-	HoaDon d1(5,3);
-	d1.inHoaDon();
+//	double arr[8] = {1.1, 3.1, 3.1, 3.1, 3.1, 3.1, 4.2, 6.4};
+//	most_common( arr, 8 );
 	
-	HoaDonKM km;
-	km.inHoaDon();
-	
-	//HoaDon km1(3,5,2);
-	//km1.inHoaDon();
+	// ? char return an address ?
+//	int arr[7] = {'code', 'code', 'code', 'code', 'van', 'van', 'hanh'};
+//	most_common( arr, 7 );
 }
